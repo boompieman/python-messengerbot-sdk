@@ -1,2 +1,2 @@
-# messenger-sdk-for-python
-Python Messenger SDK
+# python-messengerbot-sdk
+Python Messenger Bot SDK
