@@ -53,7 +53,28 @@ class FacebookBotApi(object):
         
         self._post(path="/v3.2/me/messages", params=self.params, data=json.dumps(data), timeout=timeout)
         
-#     def multicast(self, messages):
+        
+    def multicast(self, message, notification_type="REGULAR", timeout = 60):   
+        
+        data = {
+            
+            "messages": [message.as_json_dict()]
+            
+        }
+        
+        response = self._post(path="/v3.2/me/message_creatives", params=self.params, data=json.dumps(data), timeout=timeout)
+        
+        message_creative_id = response.json["message_creative_id"]
+        
+        multicast_data = {
+            "message_creative_id": message_creative_id,
+            "notification_type": notification_type,
+            "messaging_type": "MESSAGE_TAG",
+            "tag": "NON_PROMOTIONAL_SUBSCRIPTION"
+        }
+        
+        self._post(path="/v3.2/me/broadcast_messages", params=self.params, data=json.dumps(multicast_data), timeout=timeout)
+        
         
 
     def setup_started_button(self, timeout=None):
@@ -117,7 +138,7 @@ class FacebookBotApi(object):
         if 200 <= response.status_code < 300:
             pass
         else:
-            print(response.json)
-            error = Error.new_from_json_dict(response.json)
-            print(error)
-            raise FacebookBotApiError(response.status_code, error)
+
+            response_error = Error.new_from_json_dict(response.json)
+
+            raise FacebookBotApiError(response_error.error.code, response_error.error)

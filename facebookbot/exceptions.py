@@ -37,32 +37,22 @@ class BaseError(with_metaclass(ABCMeta, Exception)):
 
 
 class InvalidSignatureError(BaseError):
-    """When Webhook signature does NOT match, this error will be raised."""
 
     def __init__(self, message='-'):
-        """__init__ method.
-        :param str message: Human readable message
-        """
+
         super(InvalidSignatureError, self).__init__(message)
 
 
 class FacebookBotApiError(BaseError):
 
     def __init__(self, status_code, error=None):
-        """__init__ method.
-        :param int status_code: http status code
-        :param error: (optional) Error class object.
-        :type error: :py:class:`linebot.models.error.Error`
-        """
+
         super(FacebookBotApiError, self).__init__(error.message)
 
         self.status_code = status_code
         self.error = error
 
     def __str__(self):
-        """str.
-        :rtype: str
-        :return:
-        """
+
         return '{0}: status_code={1}, error_response={2}'.format(
             self.__class__.__name__, self.status_code, self.error)
