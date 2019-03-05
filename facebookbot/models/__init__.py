@@ -84,7 +84,8 @@ from .messages import (  # noqa
     ImageMessage,
     VideoMessage,
     AudioMessage,
-#     LocationMessage,
+    LocationMessage,
+    FallbackMessage,
 #     StickerMessage,
     FileMessage
 )

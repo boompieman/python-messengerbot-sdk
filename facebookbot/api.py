@@ -117,5 +117,7 @@ class FacebookBotApi(object):
         if 200 <= response.status_code < 300:
             pass
         else:
+            print(response.json)
             error = Error.new_from_json_dict(response.json)
+            print(error)
             raise FacebookBotApiError(response.status_code, error)

@@ -101,10 +101,10 @@ class WebhookHandler(object):
 #                     event.__class__, event.message.__class__)
 #                 func = self._handlers.get(key, None)
                 
-#             if isinstance(event, AttachmentMessageEvent):
-#                 key = self.__get_handler_key(
-#                     event.__class__, event.message.__class__)
-#                 func = self._handlers.get(key, None)
+            if isinstance(event, AttachmentMessageEvent):
+                key = self.__get_handler_key(
+                    event.__class__, event.message.attachment.__class__)
+                func = self._handlers.get(key, None)
                 
 
             if func is None:
