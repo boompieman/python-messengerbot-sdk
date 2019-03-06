@@ -3,6 +3,8 @@ python-messengerbot-sdk
 
 SDK of the Facebook Messenger API for Python.
 
+Most code structure were followed by `line-bot-sdk-python <https://github.com/line/line-bot-sdk-python>`__
+
 Install
 -------
 
@@ -147,4 +149,185 @@ upload attachment to reuse and get attachment_id
     image = ImageSendMessage(image_url="pic_url.jpg")
     attachment_id = facebook_bot_api.upload_attachment(image)
     print(attachment_id)
+
+Message objects
+~~~~~~~~~~~~~~~
+
+The following classes are found in the ``facebookbot.models`` package.
+
+TextSendMessage
+^^^^^^^^^^^^^^^
+
+.. code:: python
+
+    text_message = TextSendMessage(text='Hello, world')
+
+ImageSendMessage
+^^^^^^^^^^^^^^^^
+
+.. code:: python
+
+    image_message = ImageSendMessage(
+        image_url='https://example.com/original.jpg',
+        is_reusable=True
+    )
+
+VideoSendMessage
+^^^^^^^^^^^^^^^^
+
+.. code:: python
+
+    video_message = VideoSendMessage(
+        video_url='https://example.com/original.mp4',
+        is_reusable=True
+    )
+
+AudioSendMessage
+^^^^^^^^^^^^^^^^
+
+.. code:: python
+
+    audio_message = AudioSendMessage(
+        audio_url='https://example.com/original.m4a',
+        is_reusable=True
+    )
+    
+FileSendMessage
+^^^^^^^^^^^^^^^^
+
+.. code:: python
+
+    file_message = FileSendMessage(
+        file_url='https://example.com/original.pdf',
+        is_reusable=True
+    )
+
+TemplateSendMessage - ButtonsTemplate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: python
+
+    buttons_template_message = TemplateSendMessage(
+        template=ButtonsTemplate(
+            text="Buttons template",
+            buttons=[
+                PostbackAction(
+                    title="postback",
+                    payload="action=buy&itemid=1"
+                ),
+                URLAction(
+                    title="url", 
+                    url="http://example.com/", 
+                    webview_height_ratio='full', 
+                    messenger_extensions=None, 
+                    fallback_url=None
+                )
+            ]
+        )
+    )
+
+TemplateSendMessage - GenericTemplate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: python
+
+    generic_template_message = TemplateSendMessage(
+        template=GenericTemplate(
+            elements=[
+                GenericElement(
+                    title="GenericElement 1",
+                    image_url="https://example.com/item1.jpg",
+                    subtitle="description1",
+                    default_action=URLAction(url="http://example.com/"),
+                    buttons=[
+                        PostbackAction(title="postback_1", payload="data_1"),
+                        URLAction(
+                            title="url_1", 
+                            url="http://example.com/1", 
+                            webview_height_ratio='full', 
+                            messenger_extensions=None, 
+                            fallback_url=None
+                        )
+                    ]
+                ),
+                GenericElement(
+                    title="GenericElement 2",
+                    image_url="https://example.com/item2.jpg",
+                    subtitle="description2",
+                    default_action=URLAction(url="http://example.com/"),
+                    buttons=[
+                        PostbackAction(title="postback_2", payload="data_2"),
+                        URLAction(
+                            title="url_2", 
+                            url="http://example.com/2", 
+                            webview_height_ratio='compact', 
+                            messenger_extensions=None, 
+                            fallback_url=None
+                        )
+                    ]
+                )            
+            ]
+        )
+    )
+    
+TemplateSendMessage - MediaTemplate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+By attachment_id
+
+.. code:: python
+
+    media_template_message = TemplateSendMessage(
+        template=MediaTemplate(
+            elements=[
+                ImageElement(
+                    attachment_id=attachment_id,
+                    buttons=[
+                        PostbackAction(title="postback_1", payload="data_1"),
+                        URLAction(
+                            title="url_1", 
+                            url="http://example.com/1", 
+                            webview_height_ratio='full', 
+                            messenger_extensions=None, 
+                            fallback_url=None
+                        )
+                    ]
+                )
+            ]
+        )
+    )
+
+By facebook_url
+
+.. code:: python
+
+    media_template_message = TemplateSendMessage(
+        template=MediaTemplate(
+            elements=[
+                ImageElement(
+                    url="https://www.facebook.com/photo.php?fbid=<NUMERIC_ID>",
+                    buttons=[
+                        PostbackAction(title="postback_1", payload="data_1"),
+                        URLAction(
+                            title="url_1", 
+                            url="http://example.com/1", 
+                            webview_height_ratio='full', 
+                            messenger_extensions=None, 
+                            fallback_url=None
+                        )
+                    ]
+                )
+            ]
+        )
+    )
+
+
+Hints
+-----
+
+Examples
+~~~~~~~~
+
+`object-example <https://github.com/boompieman/python-messengerbot-sdk>`__
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
