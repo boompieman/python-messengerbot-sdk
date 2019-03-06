@@ -138,7 +138,10 @@ from .template import (  # noqa
     Template,
     ButtonsTemplate,
     GenericTemplate,
-    GenericElement
+    MediaTemplate,
+    GenericElement,
+    ImageElement,
+    VideoElement
 #     ConfirmTemplate,
 #     CarouselTemplate,
 #     CarouselColumn,

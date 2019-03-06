@@ -125,6 +125,17 @@ class FacebookBotApi(object):
         )
         
         return Profile.new_from_json_dict(response.json)
+    
+    def upload_attachment_to_get_id(self, attachment_send_message, timeout=None):
+        
+        attachment_data = {
+            
+            "message": attachment_send_message.as_json_dict()
+        }
+        
+        response = self._post(path="/v3.2/me/message_attachments", params = self.params, data=json.dumps(attachment_data), timeout=timeout)
+        
+        return response.json["attachment_id"]
         
     def _get(self, path, params=None, headers=None, stream=False, timeout=None):
         

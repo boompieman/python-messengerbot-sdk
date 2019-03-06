@@ -84,8 +84,12 @@ class MediaTemplate(Template):
         new_elements = []
         if elements:
             for element in elements:
-                new_elements.append(self.get_or_new_from_json_dict(
-                    element, Element
+                new_elements.append(self.get_or_new_from_json_dict_with_types(
+                    element, {
+                        'image': ImageElement,
+                        'video': VideoElement
+                    },
+                    type_key = 'media_type'
                 ))                
         
         self.elements = new_elements
