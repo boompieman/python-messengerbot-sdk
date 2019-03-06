@@ -12,7 +12,7 @@ from .actions import get_action, get_actions
 
 class TemplateSendMessage(SendMessage):
     
-    def __init__(self, id=None, text=None, template = None, quick_replies=None, **kwargs):
+    def __init__(self, id=None, template = None, quick_replies=None, **kwargs):
     
         super(TemplateSendMessage, self).__init__(id=id,  **kwargs)
         
@@ -71,7 +71,7 @@ class GenericTemplate(Template):
         if elements:
             for element in elements:
                 new_elements.append(self.get_or_new_from_json_dict(
-                    element, Element
+                    element, GenericElement
                 ))                
         
         self.elements = new_elements

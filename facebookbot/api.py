@@ -12,7 +12,7 @@ class FacebookBotApi(object):
 
     DEFAULT_API_ENDPOINT = 'https://graph.facebook.com'
 
-    def __init__(self, channel_access_token, endpoint=DEFAULT_API_ENDPOINT,
+    def __init__(self, page_access_token, endpoint=DEFAULT_API_ENDPOINT,
                  timeout=HttpClient.DEFAULT_TIMEOUT, http_client=RequestsHttpClient):
                  
             
@@ -21,7 +21,7 @@ class FacebookBotApi(object):
         self.headers = {}
         
         self.params = {
-            "access_token": channel_access_token
+            "access_token": page_access_token
         }
         
         if http_client:
@@ -54,7 +54,7 @@ class FacebookBotApi(object):
         self._post(path="/v3.2/me/messages", params=self.params, data=json.dumps(data), timeout=timeout)
         
         
-    def multicast(self, message, notification_type="REGULAR", timeout = 60):   
+    def broadcast(self, message, notification_type="REGULAR", timeout = 60):   
         
         data = {
             
@@ -126,7 +126,7 @@ class FacebookBotApi(object):
         
         return Profile.new_from_json_dict(response.json)
     
-    def upload_attachment_to_get_id(self, attachment_send_message, timeout=None):
+    def upload_attachment(self, attachment_send_message, timeout=None):
         
         attachment_data = {
             
@@ -135,7 +135,7 @@ class FacebookBotApi(object):
         
         response = self._post(path="/v3.2/me/message_attachments", params = self.params, data=json.dumps(attachment_data), timeout=timeout)
         
-        return response.json["attachment_id"]
+        return response.json.get("attachment_id")
         
     def _get(self, path, params=None, headers=None, stream=False, timeout=None):
         
