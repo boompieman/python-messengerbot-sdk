@@ -55,7 +55,7 @@ class Template(with_metaclass(ABCMeta, Base)):
         
 class ButtonsTemplate(Template):
     
-    def __init__(self, template_type=None, text=None, buttons=None, **kwargs):
+    def __init__(self, text=None, buttons=None, **kwargs):
 
         self.template_type = "button"
         self.text = text
@@ -63,11 +63,9 @@ class ButtonsTemplate(Template):
         
 class GenericTemplate(Template):
     
-    def __init__(self, template_type=None, elements=None, **kwargs):
+    def __init__(self, elements=None, **kwargs):
         
         self.template_type = "generic"
-        
-        print(elements)
         
         new_elements = []
         if elements:
@@ -78,7 +76,53 @@ class GenericTemplate(Template):
         
         self.elements = new_elements
         
-class Element(Base):
+class MediaTemplate(Template):
+    
+    def __init__(self, elements=None, **kwargs):
+
+        self.template_type = "media"
+        new_elements = []
+        if elements:
+            for element in elements:
+                new_elements.append(self.get_or_new_from_json_dict(
+                    element, Element
+                ))                
+        
+        self.elements = new_elements
+
+class ImageElement(Base):
+    
+    def __init__(self, attachment_id=None, facebook_url=None, buttons=None, **kwargs):
+        
+        self.media_type = "image"
+        
+        if attachment_id:
+            
+            self.attachment_id = attachment_id
+            
+        elif facebook_url:
+            
+            self.url = facebook_url
+            
+        self.buttons = get_actions(buttons)
+        
+class VideoElement(Base):
+    
+    def __init__(self, attachment_id=None, facebook_url=None, buttons=None, **kwargs):
+        
+        self.media_type = "video"
+        
+        if attachment_id:
+            
+            self.attachment_id = attachment_id
+            
+        elif facebook_url:
+            
+            self.url = facebook_url
+        
+        self.buttons = get_actions(buttons)
+        
+class GenericElement(Base):
     
     def __init__(self, title=None, image_url=None, subtitle=None, default_action=None, buttons=None, **kwargs):
         

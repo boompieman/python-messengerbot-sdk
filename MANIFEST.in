@@ -1,0 +1,9 @@
+include LICENSE
+include README.rst
+include tox.ini
+include requirements.txt
+prune *.pyc
+recursive-include docs *.rst *.py Makefile
+recursive-include tests *.py *.json
+prune docs/_build
+

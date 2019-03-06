@@ -138,7 +138,7 @@ from .template import (  # noqa
     Template,
     ButtonsTemplate,
     GenericTemplate,
-    Element
+    GenericElement
 #     ConfirmTemplate,
 #     CarouselTemplate,
 #     CarouselColumn,

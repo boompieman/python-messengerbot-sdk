@@ -76,6 +76,31 @@ class FacebookBotApi(object):
         self._post(path="/v3.2/me/broadcast_messages", params=self.params, data=json.dumps(multicast_data), timeout=timeout)
         
         
+    def setup_persistent_menu(self, timeout=None, locale="default", isDisabledInput=None):        
+        
+        persistent_menu = {
+            "persistent_menu":[
+                {
+                    "locale":locale,
+                    "composer_input_disabled":isDisabledInput,
+                    "call_to_actions": [
+                        {
+                            "type":"postback",
+                            "title":"教我怎麼吃",
+                            "payload":"inquiry_nutrition"
+                        },
+                        {
+                            "type":"postback",
+                            "title":"為什麼你們要叫 Akte",
+                            "payload":"inquiry_Akte_history"
+                        }     
+                    ]
+                }
+            ]
+        }        
+        
+        self._post(path="/v3.2/me/messenger_profile", params = self.params, data=json.dumps(persistent_menu), timeout=timeout)        
+        
 
     def setup_started_button(self, timeout=None):
         
@@ -100,9 +125,6 @@ class FacebookBotApi(object):
         )
         
         return Profile.new_from_json_dict(response.json)
-
-        
-        
         
     def _get(self, path, params=None, headers=None, stream=False, timeout=None):
         
