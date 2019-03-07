@@ -87,15 +87,6 @@ Create a new FacebookBotApi instance.
 
 You can override the ``timeout`` value for each method.
 
-setup\_started\_button(self, timeout=None)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-setup started button, when press it, then responding from GetStartedEvent
-
-.. code:: python
-
-    facebook_bot_api.setup_started_button()
-
 push\_message(self, user\_id, message, is\_sender\_action = True, timeout = None)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -105,15 +96,6 @@ Send messages to users
 
     facebook_bot_api.push_message(user_id, TextSendMessage(text='Hello World!'))
 
-broadcast(self, message, notification\_type="REGULAR", timeout = 60)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-broadcast to all page followers but limited to 10,000 per message.
-
-.. code:: python
-
-    facebook_bot_api.broadcast(TextSendMessage(text='Hello World!'))
-    
 broadcast(self, message, notification\_type="REGULAR", timeout = 60)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -138,6 +120,23 @@ Get user profile information.
     print(profile.profile_pic)
     print(profile.locale)
     print(profile.timezone)
+
+setup\_started\_button(self, timeout=None)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+setup started button, when press it, then responding from GetStartedEvent
+
+.. code:: python
+
+    facebook_bot_api.setup_started_button()
+
+setup\_persistent\_menu(self, persistent\_menus, timeout=None)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+setup persistent menu
+
+.. code:: python
+
+    facebook_bot_api.setup_persistent_menu(persistent_menus)
     
 upload\_attachment(self, attachment\_send\_message, timeout=None)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
