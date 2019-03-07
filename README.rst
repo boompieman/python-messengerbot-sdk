@@ -136,6 +136,22 @@ setup persistent menu
 
 .. code:: python
 
+    persistent_menus=[
+        PersistentMenu(
+            call_to_actions=[
+                NestedAction(
+                    title="nested_title", 
+                    call_to_actions=[
+                        PostbackAction(title="nested_postback", payload="nested_postback"),
+                        URLAction(title="nested_url", url='https://example.com/')
+                    ]
+                ),
+                PostbackAction(title="postback", payload="action=buy&itemid=1"),
+                URLAction(title="url", url='https://example.com/')
+            ]
+        )
+    ]
+
     facebook_bot_api.setup_persistent_menu(persistent_menus)
     
 upload\_attachment(self, attachment\_send\_message, timeout=None)
