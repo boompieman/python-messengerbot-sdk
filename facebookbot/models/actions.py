@@ -12,7 +12,8 @@ def get_action(action):
     action_obj = Base.get_or_new_from_json_dict_with_types(
         action, {
             'postback': PostbackAction,
-            'web_url': URLAction
+            'web_url': URLAction,
+            'nested': NestedAction
         }
     )
     return action_obj
@@ -62,4 +63,13 @@ class URLAction(Action):
         self.webview_height_ratio = webview_height_ratio
         self.messenger_extensions = messenger_extensions
         self.fallback_url = fallback_url
+        
+class NestedAction(Action):
+    
+    def __init__(self, title=None, call_to_actions=None, **kwargs):
 
+        super(NestedAction, self).__init__(**kwargs)
+
+        self.type = 'nested'
+        self.title = title
+        self.call_to_actions = get_actions(call_to_actions)

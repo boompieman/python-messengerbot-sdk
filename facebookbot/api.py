@@ -76,28 +76,14 @@ class FacebookBotApi(object):
         self._post(path="/v3.2/me/broadcast_messages", params=self.params, data=json.dumps(multicast_data), timeout=timeout)
         
         
-    def setup_persistent_menu(self, timeout=None, locale="default", isDisabledInput=None):        
+    def setup_persistent_menu(self, persistent_menus, timeout=None):        
+        
+        if not isinstance(persistent_menus, (list, tuple)):
+            persistent_menus = [persistent_menus]        
         
         persistent_menu = {
-            "persistent_menu":[
-                {
-                    "locale":locale,
-                    "composer_input_disabled":isDisabledInput,
-                    "call_to_actions": [
-                        {
-                            "type":"postback",
-                            "title":"教我怎麼吃",
-                            "payload":"inquiry_nutrition"
-                        },
-                        {
-                            "type":"postback",
-                            "title":"為什麼你們要叫 Akte",
-                            "payload":"inquiry_Akte_history"
-                        }     
-                    ]
-                }
-            ]
-        }        
+            "persistent_menu":[ persistent_menu.as_json_dict() for persistent_menu in persistent_menus ]
+        }
         
         self._post(path="/v3.2/me/messenger_profile", params = self.params, data=json.dumps(persistent_menu), timeout=timeout)        
         

@@ -96,6 +96,11 @@ from .responses import (  # noqa
 #     RichMenuResponse,
 #     Content as MessageContent,  # backward compatibility
 )
+
+from .persistent_menu import (
+    PersistentMenu,
+    
+)
 # from .rich_menu import (  # noqa
 #     RichMenu,
 #     RichMenuSize,
@@ -123,8 +128,8 @@ from .obj import (
 from .actions import (
     Action,
     PostbackAction,
-    URLAction
-    
+    URLAction,
+    NestedAction
 )
 # from .sources import (  # noqa
 #     Source,
