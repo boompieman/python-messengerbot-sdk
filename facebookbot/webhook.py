@@ -7,6 +7,8 @@ from .models.events import (
 #     QuickReplyMessageEvent,
 #     JoinEvent,
 #     LeaveEvent,
+    TextEchoMessageEvent,
+    AttachmentEchoMessageEvent,
     PostbackEvent,
 #     BeaconEvent,
 #     AccountLinkEvent,
@@ -21,7 +23,6 @@ class WebhookParser(object):
 
     def __init__(self):
         pass
-#         self.signature_validator = SignatureValidator(channel_secret)
 
     def parse(self, body_json):
         
@@ -32,16 +33,28 @@ class WebhookParser(object):
                 for event in entry["messaging"]:  
                     
                     if event.get("message") and event["message"].get("text"):  # someone sent us a message
-            
-                        events.append(TextMessageEvent.new_from_json_dict(event))
+                        
+                        if event["message"].get("app_id"):
+                            
+                            events.append(TextEchoMessageEvent.new_from_json_dict(event))
+                            
+                        else:
+                            
+                            events.append(TextMessageEvent.new_from_json_dict(event))
                 
                         if event["message"].get("quick_reply"):
 #                             QuickReplyMessageEvent
                             pass
                 
                     elif event.get("message") and event["message"].get("attachments"):
+            
+                        if event["message"].get("app_id"):
+                    
+                            events.append(AttachmentEchoMessageEvent.new_from_json_dict(event))
+                    
+                        else:
                         
-                        events.append(AttachmentMessageEvent.new_from_json_dict(event))
+                            events.append(AttachmentMessageEvent.new_from_json_dict(event))
             
                     elif event.get("delivery"):  # delivery confirmation
                         pass

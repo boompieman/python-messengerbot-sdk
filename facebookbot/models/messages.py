@@ -9,7 +9,7 @@ from .base import Base
 class Message(with_metaclass(ABCMeta, Base)):
     """Abstract Base Class of Message."""
 
-    def __init__(self, id=None, mid=None, seq=None, **kwargs):
+    def __init__(self, id=None, mid=None, seq=None, is_echo=None, app_id=None, metadata=None, **kwargs):
 
         super(Message, self).__init__(**kwargs)
 

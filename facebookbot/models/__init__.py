@@ -46,6 +46,8 @@ from .events import (  # noqa
 #     JoinEvent,
 #     LeaveEvent,
     PostbackEvent,
+    TextEchoMessageEvent,
+    AttachmentEchoMessageEvent
 #     AccountLinkEvent,
 #     BeaconEvent,
 #     Postback,

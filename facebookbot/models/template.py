@@ -79,6 +79,9 @@ class GenericTemplate(Template):
 class MediaTemplate(Template):
     
     def __init__(self, elements=None, **kwargs):
+        
+        if not isinstance(elements, (list,tuple)):
+            elements = [elements]
 
         self.template_type = "media"
         new_elements = []

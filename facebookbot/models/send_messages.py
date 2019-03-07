@@ -57,72 +57,72 @@ class TextSendMessage(SendMessage):
         
 class ImageSendMessage(SendMessage):
 
-    def __init__(self, id=None, image_url=None, is_reusable=True, **kwargs):
+    def __init__(self, id=None, url=None, is_reusable=True, **kwargs):
 
         super(ImageSendMessage, self).__init__(id=id, **kwargs)
         
-        payload = ImagePayload(image_url=image_url, is_reusable=is_reusable)
+        payload = ImagePayload(url=url, is_reusable=is_reusable)
         
         self.attachment = self.get_or_new_from_json_dict(payload, ImagePayload)
 
 class VideoSendMessage(SendMessage):
 
-    def __init__(self, id=None, video_url=None, is_reusable=True, **kwargs):
+    def __init__(self, id=None, url=None, is_reusable=True, **kwargs):
 
         super(VideoSendMessage, self).__init__(id=id, **kwargs)
         
-        payload = VideoPayload(video_url=video_url, is_reusable=is_reusable)
+        payload = VideoPayload(url=url, is_reusable=is_reusable)
         
         self.attachment = self.get_or_new_from_json_dict(payload, VideoPayload)
         
 class AudioSendMessage(SendMessage):
 
-    def __init__(self, id=None, audio_url=None, is_reusable=True, **kwargs):
+    def __init__(self, id=None, url=None, is_reusable=True, **kwargs):
 
         super(AudioSendMessage, self).__init__(id=id, **kwargs)
         
-        payload = AudioPayload(audio_url=audio_url, is_reusable=is_reusable)
+        payload = AudioPayload(url=url, is_reusable=is_reusable)
         
         self.attachment = self.get_or_new_from_json_dict(payload, AudioPayload)
         
 class FileSendMessage(SendMessage):
 
-    def __init__(self, id=None, file_url=None, is_reusable=True, **kwargs):
+    def __init__(self, id=None, url=None, is_reusable=True, **kwargs):
 
         super(FileSendMessage, self).__init__(id=id, **kwargs)
         
-        payload = FilePayload(file_url=file_url, is_reusable=is_reusable)
+        payload = FilePayload(url=url, is_reusable=is_reusable)
         
         self.attachment = self.get_or_new_from_json_dict(payload, FilePayload)        
         
 ## Payload        
 class ImagePayload(SendMessage):
     
-    def __init__(self, id=None, image_url=None, is_reusable=None, **kwargs):
+    def __init__(self, id=None, url=None, is_reusable=None, **kwargs):
 
         self.type = 'image'
-        self.payload = Payload(url=image_url, is_reusable=is_reusable)          
+        self.payload = Payload(url=url, is_reusable=is_reusable)          
         
 class VideoPayload():
 
-    def __init__(self, id=None, video_url=None, is_reusable=True, **kwargs):
+    def __init__(self, id=None, url=None, is_reusable=True, **kwargs):
         
         self.type = 'video'
-        self.payload = Payload(url=video_url, is_reusable=is_reusable)
+        self.payload = Payload(url=url, is_reusable=is_reusable)
         
 class AudioPayload():
 
-    def __init__(self, id=None, audio_url=None, is_reusable=True, **kwargs):
+    def __init__(self, id=None, url=None, is_reusable=True, **kwargs):
         
         self.type = 'audio'
-        self.payload = Payload(url=audio_url, is_reusable=is_reusable)
+        self.payload = Payload(url=url, is_reusable=is_reusable)
         
 class FilePayload():
 
-    def __init__(self, id=None, file_url=None, is_reusable=True, **kwargs):
+    def __init__(self, id=None, url=None, is_reusable=True, **kwargs):
         
         self.type = 'file'
-        self.payload = Payload(url=file_url, is_reusable=is_reusable)
+        self.payload = Payload(url=url, is_reusable=is_reusable)
         
 class Payload(SendMessage):
     

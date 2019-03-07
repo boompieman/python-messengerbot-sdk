@@ -61,6 +61,26 @@ class PostbackEvent(Event):
             postback, Postback
         )
         
+class TextEchoMessageEvent(Event):
+
+    def __init__(self, timestamp=None, sender=None, recipient=None, message=None, **kwargs):
+
+        super(TextEchoMessageEvent, self).__init__(
+            timestamp=timestamp, sender=sender, recipient=recipient, **kwargs
+        )
+        
+        self.message = self.get_or_new_from_json_dict(message, TextMessage)  
+        
+class AttachmentEchoMessageEvent(Event):
+
+    def __init__(self, timestamp=None, sender=None, recipient=None, message=None, **kwargs):
+
+        super(AttachmentEchoMessageEvent, self).__init__(
+            timestamp=timestamp, sender=sender, recipient=recipient, **kwargs
+        )
+        
+        self.message = self.get_or_new_from_json_dict(message, AttachmentMessage)        
+        
 class LinkingEvent(Event):
 
     def __init__(self, timestamp=None, sender=None, recipient=None, account_linking=None, **kwargs):
