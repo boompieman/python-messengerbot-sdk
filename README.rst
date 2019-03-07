@@ -352,6 +352,6 @@ API Documents
 Examples
 ~~~~~~~~
 
-`object-example <https://github.com/boompieman/python-messengerbot-sdk/blob/master/example/flask/app.py>`__
+`flask-example <https://github.com/boompieman/python-messengerbot-sdk/blob/master/example/flask/app.py>`__
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
