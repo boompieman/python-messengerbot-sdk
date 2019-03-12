@@ -94,7 +94,7 @@ from .messages import (  # noqa
 from .responses import (  # noqa
     Profile,
 #     MemberIds,
-#     Content,
+    Content,
 #     RichMenuResponse,
 #     Content as MessageContent,  # backward compatibility
 )

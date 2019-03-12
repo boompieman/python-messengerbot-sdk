@@ -42,7 +42,7 @@ class HttpClient(with_metaclass(ABCMeta)):
         raise NotImplementedError
 
     @abstractmethod
-    def post(self, url, headers=None, params=None, data=None, timeout=None):
+    def post(self, url, headers=None, params=None, data=None, timeout=None, files=None):
         """POST request.
         :param str url: Request url
         :param dict headers: (optional) Request headers
@@ -110,7 +110,7 @@ class RequestsHttpClient(HttpClient):
 
         return RequestsHttpResponse(response)
 
-    def post(self, url, headers=None, params=None, data=None, timeout=None):
+    def post(self, url, headers=None, params=None, data=None, timeout=None, files=None):
         """POST request.
         :param str url: Request url
         :param dict headers: (optional) Request headers
@@ -127,7 +127,7 @@ class RequestsHttpClient(HttpClient):
             timeout = self.timeout
 
         response = requests.post(
-            url, headers=headers, params=params, data=data, timeout=timeout
+            url, headers=headers, params=params, data=data, timeout=timeout, files = files
         )
 
         return RequestsHttpResponse(response)

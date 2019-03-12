@@ -5,7 +5,7 @@ from .http_client import HttpClient, RequestsHttpClient
 from .exceptions import FacebookBotApiError
 
 from .models import (
-    Profile, Error
+    Profile, Error, Content
 )
 
 class FacebookBotApi(object):
@@ -112,7 +112,40 @@ class FacebookBotApi(object):
         
         return Profile.new_from_json_dict(response.json)
     
-    def upload_attachment(self, attachment_send_message, timeout=None):
+    def upload_local_attachment(self, file_path, file_type, timeout=None):
+        
+        if "image" in file_type:
+            
+            data = {"attachment":{"type":"image", "payload":{"is_reusable":True}}}
+            
+        elif "video" in file_type:
+            
+            data = {"attachment":{"type":"video", "payload":{"is_reusable":True}}}
+        
+        
+        if '/' in file_path:
+            file_name = file_path.split('/')[-1]
+
+        else:
+            file_name = file_path
+
+
+        files = {
+            'filedata': (file_name, open(file_path, 'rb'), file_type)
+        }
+
+        response = self._post(
+            path="/v3.2/me/message_attachments",
+            params = self.params,
+            data = {'message': json.dumps(data)},
+            timeout=timeout,
+            headers = {},
+            files=files
+        )        
+
+        return response.json.get("attachment_id")
+        
+    def upload_remote_attachment(self, attachment_send_message, timeout=None):
         
         attachment_data = {
             
@@ -138,15 +171,15 @@ class FacebookBotApi(object):
         self.__check_error(response)
         return response
 
-    def _post(self, path, params=None, data=None, headers=None, timeout=None):
+    def _post(self, path, params=None, data=None, headers=None, timeout=None, files=None):
         url = self.endpoint + path
 
         if headers is None:
             headers = {'Content-Type': 'application/json'}
         headers.update(self.headers)
-
+        
         response = self.http_client.post(
-            url, params=params, headers=headers, data=data, timeout=timeout
+            url, params=params, headers=headers, data=data, timeout=timeout, files=files
         )
         
         self.__check_error(response)
