@@ -292,6 +292,10 @@ By attachment_id
 
 .. code:: python
 
+    image_send_message = ImageSendMessage(url="https://via.placeholder.com/1024x1024")
+
+    attachment_id = fb_bot_api.upload_attachment(image_send_message)     
+
     media_template_message = TemplateSendMessage(
         template=MediaTemplate(
             elements=[
@@ -320,7 +324,7 @@ By facebook_url
         template=MediaTemplate(
             elements=[
                 ImageElement(
-                    url="https://www.facebook.com/photo.php?fbid=<NUMERIC_ID>",
+                    facebook_url="https://www.facebook.com/photo.php?fbid=<NUMERIC_ID>",
                     buttons=[
                         PostbackAction(title="postback_1", payload="data_1"),
                         URLAction(
@@ -340,9 +344,14 @@ By facebook_url
 Hints
 -----
 
+API Documents
+~~~~~~~~
+
+`Official Documents <https://developers.facebook.com/docs/messenger-platform>`__
+
 Examples
 ~~~~~~~~
 
-`object-example <https://github.com/boompieman/python-messengerbot-sdk>`__
+`flask-example <https://github.com/boompieman/python-messengerbot-sdk/blob/master/example/flask/app.py>`__
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
