@@ -154,16 +154,29 @@ setup persistent menu
 
     facebook_bot_api.setup_persistent_menu(persistent_menus)
     
-upload\_attachment(self, attachment\_send\_message, timeout=None)
+upload\_remote\_attachment(self, attachment\_send\_message, timeout=None)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-upload attachment to reuse and get attachment_id
+upload remote attachment(e.q. FacebookURL or https url) to reuse and get attachment_id
 
 .. code:: python
 
     image = ImageSendMessage(image_url="pic_url.jpg")
-    attachment_id = facebook_bot_api.upload_attachment(image)
+    attachment_id = facebook_bot_api.upload_remote_attachment(image)
     print(attachment_id)
+    
+upload\_local\_attachment(self, attachment\_send\_message, timeout=None)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+upload local attachment to reuse and get attachment_id
+
+.. code:: python
+
+    attachment_id = facebook_bot_api.upload_local_attachment(
+        file_path = "/your/file/path"
+        file_type = "image/jpeg" or "image/png" or "video/mpeg"
+    )
+    print(attachment_id)    
 
 Message objects
 ~~~~~~~~~~~~~~~
