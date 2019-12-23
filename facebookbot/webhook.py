@@ -4,7 +4,7 @@ from .models.events import (
     LinkingEvent,
     UnLinkingEvent,
     GetStartedEvent,
-#     QuickReplyMessageEvent,
+    QuickReplyMessageEvent,
 #     JoinEvent,
 #     LeaveEvent,
     TextEchoMessageEvent,
@@ -27,24 +27,26 @@ class WebhookParser(object):
     def parse(self, body_json):
         
         events = []
+
+        print(body_json)
         
         if body_json["object"] == "page":
             for entry in body_json["entry"]:
-                for event in entry["messaging"]:  
+                for event in entry["messaging"]:
                     
                     if event.get("message") and event["message"].get("text"):  # someone sent us a message
                         
                         if event["message"].get("app_id"):
                             
                             events.append(TextEchoMessageEvent.new_from_json_dict(event))
+
+                        elif event["message"].get("quick_reply"):
+
+                            events.append(QuickReplyMessageEvent.new_from_json_dict(event))
                             
                         else:
                             
                             events.append(TextMessageEvent.new_from_json_dict(event))
-                
-                        if event["message"].get("quick_reply"):
-#                             QuickReplyMessageEvent
-                            pass
                 
                     elif event.get("message") and event["message"].get("attachments"):
             
@@ -108,6 +110,7 @@ class WebhookHandler(object):
         for event in events:
             func = None
             key = None
+
 
 #             if isinstance(event, TextMessageEvent):
 #                 key = self.__get_handler_key(

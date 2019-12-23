@@ -38,13 +38,13 @@ with open('README.rst', 'r') as fd:
     long_description = fd.read()
 
 setup(
-    name="python-messengerbot-sdk",
+    name="fbsdk",
     version=__version__,
     author="Sam Chang",
     author_email="t0915290092@gmail.com",
     maintainer="Sam Chang",
     maintainer_email="t0915290092@gmail.com",
-    url="https://github.com/boompieman/python-messengerbot-sdk",
+    url="https://github.com/boompieman/fbsdk",
     description="Facebook Messaging API SDK for Python",
     long_description=long_description,
     license='Apache License 2.0',

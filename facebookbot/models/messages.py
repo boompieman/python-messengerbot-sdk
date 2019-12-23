@@ -15,7 +15,7 @@ class Message(with_metaclass(ABCMeta, Base)):
 
         self.id = id
         self.mid = mid
-        self.seq = seq        
+        self.seq = seq
 
 class TextMessage(Message):
 
@@ -24,7 +24,16 @@ class TextMessage(Message):
         super(TextMessage, self).__init__(id=id, mid=mid, seq=seq, **kwargs)
 
         self.text = text
-        
+
+class QuickReplyMessage(Message):
+
+    def __init__(self, id=None, mid=None, seq=None, text=None, quick_reply=None, **kwargs):
+
+        super(QuickReplyMessage, self).__init__(id=id, mid=mid, seq=seq, text=text, quick_reply=quick_reply, **kwargs)
+
+        self.text = text
+        self.quick_reply = self.get_or_new_from_json_dict(quick_reply, QuickReply)
+
 class AttachmentMessage(Message):
     
     def __init__(self, id=None, mid=None, seq=None, attachments=None, **kwargs):
@@ -116,5 +125,13 @@ class Payload(with_metaclass(ABCMeta, Base)):
         
         self.url = url
         self.coordinates = self.get_or_new_from_json_dict(coordinates, Coordinates)
+
+
+class QuickReply(with_metaclass(ABCMeta, Base)):
+
+    def __init__(self, payload=None, **kwargs):
+        super(QuickReply, self).__init__(**kwargs)
+
+        self.payload = payload
     
     

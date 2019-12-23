@@ -47,7 +47,8 @@ from .events import (  # noqa
 #     LeaveEvent,
     PostbackEvent,
     TextEchoMessageEvent,
-    AttachmentEchoMessageEvent
+    AttachmentEchoMessageEvent,
+    QuickReplyMessageEvent
 #     AccountLinkEvent,
 #     BeaconEvent,
 #     Postback,
@@ -88,6 +89,7 @@ from .messages import (  # noqa
     AudioMessage,
     LocationMessage,
     FallbackMessage,
+    QuickReplyMessage,
 #     StickerMessage,
     FileMessage
 )

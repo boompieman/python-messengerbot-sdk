@@ -11,7 +11,12 @@ from .messages import (
     ImageMessage,
     VideoMessage,
     AudioMessage,
-    FileMessage
+    FileMessage,
+    QuickReplyMessage
+)
+
+from .quick_reply import (
+    TextQuickReply
 )
 
 from .obj import Obj
@@ -48,6 +53,17 @@ class AttachmentMessageEvent(Event):
         )
 
         self.message = self.get_or_new_from_json_dict(message, AttachmentMessage)
+
+class QuickReplyMessageEvent(Event):
+
+    def __init__(self, timestamp=None, sender=None, recipient=None, message=None, **kwargs):
+
+        super(QuickReplyMessageEvent, self).__init__(
+            timestamp=timestamp, sender=sender, recipient=recipient, **kwargs
+        )
+
+        self.message = self.get_or_new_from_json_dict(message, QuickReplyMessage)
+
     
 class PostbackEvent(Event):
 
